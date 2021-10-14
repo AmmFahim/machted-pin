@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="displayPin"  class="form-control" type="text">
+                    <button id="generatePin" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <form action="" name="form">
+                        <div class="result-area">
+                            <input type="text" id="inputPlace" placeholder="0" name="result" class="main-bar col-md-12 fahim ">
+                        </div>
+                        <div class="button-area">
+
+
+                            <div class="calc-button-row">
+                                <input type="button" value="7" name="btn" class="button" onclick="calculate(this.value)">
+                                <input type="button" value="8" name="btn" class="button"  onclick="calculate(this.value)">
+                                <input type="button" value="9" name="btn" class="button"  onclick="calculate(this.value)">
+                            </div>
+
+                            <div class="calc-button-row">
+                                <input type="button" value="4" name="btn" class="button"  onclick="calculate(this.value)"> 
+                                <input type="button" value="5" name="btn" class="button"  onclick="calculate(this.value)">
+                                <input type="button" value="6" name="btn" class="button"  onclick="calculate(this.value)">
+                            </div>
+
+                            <div class="calc-button-row">
+                                <input type="button" value="1" name="btn" class="button"  onclick="calculate(this.value)">
+                                <input type="button" value="2" name="btn" class="button"  onclick="calculate(this.value)">
+                                <input type="button" value="3" name="btn" class="button"  onclick="calculate(this.value)">
+                            </div>
+
+                            <div class="calc-button-row">
+                                
+                                <input type="button" value="<" name="btn" class="button" onclick="calculate(this.value)">             
+                                <input type="button" value="0" name="btn" class="button" onclick="calculate(this.value)">
+                                <input type="button" value="C" name="btn" class="button" onclick="form.result.value = ''">
+                            </div>
+        
+                        </div>
+                    </form>
+
+                    <div>
+                        <button id="submitPlz" type="submit" class="submit-btn">Submit</button>
+                        <p class="action-left">3 try left</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="unMatched" class="notify unmatched">❌ Pin Didn't Match, Please try again</p>
+            <p id="pinMatched" class="notify matched">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+    <script>
+        const toGenerate = document.getElementById("generatePin");
+        toGenerate.addEventListener("click", function(){
+            document.getElementById("displayPin").value = Math.ceil(Math.random() * 10000);
+            pin = document.getElementById("displayPin").value
+        })
+
+        function calculate(selectBtn){
+
+            const previousvalue = document.getElementById("inputPlace").value
+            currentValue = previousvalue + selectBtn;
+
+           document.getElementById("inputPlace").value = currentValue;
+
+
+        }
+        document.getElementById("submitPlz").addEventListener("click", function(){
+            // const submitValue = currentValue;
+            if(pin == currentValue){
+                const checkValue = document.getElementById("unMatched");
+                checkValue.style.display = "none";
+
+                const checkMatchedValue = document.getElementById("pinMatched");
+                checkMatchedValue.style.display = "block";
+            }
+            else{
+                const checkValue = document.getElementById("unMatched");
+                checkValue.style.display = "block";
+                const checkMatchedValue = document.getElementById("pinMatched");
+                checkMatchedValue.style.display = "none";
+
+            }
+            
+        })
+
+
+
+    </script>
+</body>
+</html>
